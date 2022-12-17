@@ -1,12 +1,12 @@
 import { Controller, Get } from '@nestjs/common';
-import { SMTPMailService } from './mail/smtp.service';
+import { PrismaService } from './prisma.service';
 
-@Controller()
+@Controller('notifications')
 export class AppController {
-  constructor(private readonly mailService: SMTPMailService) {}
+  constructor(private readonly prisma: PrismaService) {}
 
   @Get()
-  sendMail(): string {
-    return this.mailService.sendMail();
+  getNotifications() {
+    return this.prisma.notification.findMany();
   }
 }
