@@ -1,12 +1,12 @@
 import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+import { SMTPMailService } from './mail/smtp.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly mailService: SMTPMailService) {}
 
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  sendMail(): string {
+    return this.mailService.sendMail();
   }
 }
