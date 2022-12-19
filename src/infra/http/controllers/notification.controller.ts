@@ -5,10 +5,12 @@ import { GetRecipientNotifications } from '@app/services/get-recipient-notificat
 import { ReadNotification } from '@app/services/read-notification';
 import { UnreadNotification } from '@app/services/unread-notification';
 import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { SendNotification } from 'src/app/services/send-notification';
 import { CreateNotificationBody } from '../dtos/create-notification-body';
 import { NotificationModel } from '../models/notification-model';
 
+@ApiTags('notifications')
 @Controller('notifications')
 export class NotificationsController {
   constructor(
