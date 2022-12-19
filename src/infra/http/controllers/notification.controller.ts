@@ -1,4 +1,5 @@
 import { CancelNotification } from '@app/services/cancel-notification';
+import { ReadNotification } from '@app/services/read-notification';
 import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 import { SendNotification } from 'src/app/services/send-notification';
 import { CreateNotificationBody } from '../dtos/create-notification-body';
@@ -9,6 +10,7 @@ export class NotificationsController {
   constructor(
     private sendNotification: SendNotification,
     private cancelNotification: CancelNotification,
+    private readNotification: ReadNotification,
   ) {}
 
   @Patch(':id/cancel')
@@ -22,7 +24,12 @@ export class NotificationsController {
 
   async getFromRecipient() {}
 
-  async read() {}
+  @Patch(':id/read')
+  async read(@Param('id') id: string) {
+    await this.readNotification.execute({
+      notificationId: id,
+    });
+  }
 
   async unread() {}
 
