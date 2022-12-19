@@ -62,6 +62,7 @@ export class NotificationsController {
       notificationId: id,
     });
   }
+
   @Post()
   async create(@Body() body: CreateNotificationBody) {
     const { recipientId, content, category } = body;
