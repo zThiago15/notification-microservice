@@ -1,7 +1,7 @@
 import { Notification } from '@app/entities/notification';
 
-export class PrismaNotificationMapper {
-  static toPrisma(notification: Notification) {
+export class NotificationModel {
+  static toHttp(notification: Notification) {
     return {
       id: notification.id,
       category: notification.category,
