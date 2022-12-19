@@ -1,4 +1,5 @@
 import { CancelNotification } from '@app/services/cancel-notification';
+import { CountRecipientNotifications } from '@app/services/count-recipient-notifications';
 import { ReadNotification } from '@app/services/read-notification';
 import { UnreadNotification } from '@app/services/unread-notification';
 import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
@@ -13,6 +14,7 @@ export class NotificationsController {
     private cancelNotification: CancelNotification,
     private readNotification: ReadNotification,
     private unreadNotification: UnreadNotification,
+    private countRecipientNotifications: CountRecipientNotifications,
   ) {}
 
   @Patch(':id/cancel')
@@ -22,7 +24,18 @@ export class NotificationsController {
     });
   }
 
-  async countFromRecipient() {}
+  @Get('count/from/:recipientId')
+  async countFromRecipient(
+    @Param('recipientId') recipientId: string,
+  ): Promise<{ count: number }> {
+    const { count } = await this.countRecipientNotifications.execute({
+      recipientId,
+    });
+
+    return {
+      count,
+    };
+  }
 
   async getFromRecipient() {}
 
